@@ -137,13 +137,13 @@ public class SRBarcodeScanner: UIView, AVCaptureMetadataOutputObjectsDelegate {
     
     // MARK: - AVCaptureMetadataOutputObjectsDelegate
     
-    @nonobjc public func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
-        
+    
+    public func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         if metadataObjects.count > 0 {
-            let string = metadataObjects[0].stringValue as String
-            delegate?.foundBarcode?(barcode: string)
+            if let string = metadataObjects[0] as? String {
+                delegate?.foundBarcode?(barcode: string)
+            }
         }
-        
     }
     
 }
